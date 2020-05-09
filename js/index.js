@@ -1,6 +1,6 @@
 let info = {
     'h1': {
-        'text': 'Hello user',
+        'text': 'SUP party people',
         'secondText': 'Welcome to Fun Bus',
         'color': 'red'
     },
@@ -15,11 +15,7 @@ let info = {
         }
 }
 
-
-let resizeImg = document.querySelectorAll('img');
 let resetH1;
-let signUpText = 'you have clicked me';
-
 
 //-----------------Mouse Events----------------//
 
@@ -64,9 +60,6 @@ function signUp(object){
 
 signUp(info);
 
-
-// let images = ['img\\adventure.jpg', 'img\\destination.jpg', 'img\\fun-bus.jpg', 'img\\fun.jpg']
-
 function updateImage(object){
     let allImg = document.querySelectorAll('img');
     let i = 0;
@@ -74,12 +67,12 @@ function updateImage(object){
     object['images'].placeImg.forEach((el) => {
     addEventListener('click', (e) => {
         (i < object['images'].placeImg.length) 
-        ? (e.target.src = object['images'].placeImg[i], console.log(i))
+        ? (e.target.src = object['images'].placeImg[i])
         : i = 0;
         })
         
     })
-    
+
     allImg.forEach(el => {
         el.addEventListener('click', (e) => {
             i++;
@@ -122,7 +115,7 @@ window.addEventListener('scroll', () => {                        //7
 
 //---------------Resizing Events-------------//
 
-
+let resizeImg = document.querySelectorAll('img');
 resizeImg.forEach(el => {
     window.addEventListener('resize', (e) => {                  //8
         (e.target.innerWidth < 800)
