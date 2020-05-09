@@ -12,10 +12,26 @@ let info = {
     },
     'images': {
         'placeImg': ['img\\adventure.jpg', 'img\\destination.jpg', 'img\\fun-bus.jpg', 'img\\fun.jpg']
-        }
+    },
+    'body': {
+        'color1': 'grey',
+        'color2': 'dodgerblue',
+        'color3': 'pink',
+        'color4': 'white'
+    },
+    'scroll': {
+        'headerText': 'Fun Bus',
+        'blurColor': 'transparent',
+        'blurTextShadow': '0 0 10px rgba(0,0,0,0.5)'
+    },
+    'resize': {
+        'resizeWidth': '800',
+        'imgBorderRadius': '50%'
+    },
+    'footerAlert': {
+        'alertMsg': 'this is a footer'
+    }
 }
-
-let resetH1;
 
 //-----------------Mouse Events----------------//
 
@@ -34,6 +50,7 @@ function hoverNav(object) {
 hoverNav(info);
 
 function headerDblClick(object){
+    let resetH1;
     let logoHeading = document.querySelector('.logo-heading')
     logoHeading.addEventListener('dblclick', (e) => {                   //3
         window.clearTimeout(resetH1);
@@ -64,7 +81,7 @@ function updateImage(object){
     let allImg = document.querySelectorAll('img');
     let i = 0;
 
-    object['images'].placeImg.forEach((el) => {
+    object['images'].placeImg.forEach((el) => {                    //5
     addEventListener('click', (e) => {
         (i < object['images'].placeImg.length) 
         ? (e.target.src = object['images'].placeImg[i])
@@ -77,58 +94,88 @@ function updateImage(object){
         el.addEventListener('click', (e) => {
             i++;
         })
-    })
-    
+    }) 
 }
 
 updateImage(info)
 
+function alertFooter(object){
+    let footer = document.querySelector('.footer');               //6
+    footer.addEventListener('click', (e) => {
+        alert(object['footerAlert'].alertMsg)
+    })
+}
+
+alertFooter(info)
+
 
 //------------------Keydown Events--------------//
 
-let bodyBackground = document.querySelector('body');
-bodyBackground.addEventListener('keydown', (e) => {               //6
-    (e.key === '1')
-    ? e.target.style.background = "grey"
-    : (e.key === '2')
-    ? e.target.style.background = "dodgerblue"
-    : (e.key === '3')
-    ? e.target.style.background = "pink"
-    : e.target.style.background = "white";
-})
+function bodyBackground(object){
+    let background = document.querySelector('body');
+    background.addEventListener('keydown', (e) => {               //7
+        (e.key === '1')
+        ? e.target.style.background = object['body'].color1
+        : (e.key === '2')
+        ? e.target.style.background = object['body'].color2
+        : (e.key === '3')
+        ? e.target.style.background = object['body'].color3
+        : e.target.style.background = object['body'].color4;
+    })
+}
+
+bodyBackground(info);
 
 //----------------Scrolling Events--------------//
-let homeBlur = document.querySelector('.home');
-let isScrolling;
-let logoHeading = document.querySelector('.logo-heading')
-window.addEventListener('scroll', () => {                        //7
-    logoHeading.textContent = 'Fun Bus'; 
-    homeBlur.style.color = 'transparent';
-    homeBlur.style.textShadow = '0 0 10px rgba(0,0,0,0.5)'
-    window.clearTimeout( isScrolling );
 
-	isScrolling = setTimeout( () =>{
-        homeBlur.style.color = 'initial';
-        homeBlur.style.textShadow = 'initial'
-    }, 90);
-});
+function scrollingEvent(object){
+    let homeBlur = document.querySelector('.home');
+    let isScrolling;
+    let logoHeading = document.querySelector('.logo-heading')
+
+    window.addEventListener('scroll', () => {                        //8
+        logoHeading.textContent = object['scroll'].headerText; 
+        homeBlur.style.color = object['scroll'].blurColor;
+        homeBlur.style.textShadow = object['scroll'].blurTextShadow;
+        window.clearTimeout( isScrolling );
+    
+        isScrolling = setTimeout( () =>{
+            homeBlur.style.color = 'initial';
+            homeBlur.style.textShadow = 'initial'
+        }, 90);
+    });
+}
+
+scrollingEvent(info)
+
 
 //---------------Resizing Events-------------//
 
-let resizeImg = document.querySelectorAll('img');
-resizeImg.forEach(el => {
-    window.addEventListener('resize', (e) => {                  //8
-        (e.target.innerWidth < 800)
-        ? el.style.borderRadius = '50%'
-        : el.style.borderRadius = 'initial'; 
-     })
-})
+function resizeBorderRadius(object){
+    let resizeImg = document.querySelectorAll('img');
+    resizeImg.forEach(el => {
+        window.addEventListener('resize', (e) => {                  //9
+            (e.target.innerWidth < object['resize'].resizeWidth)
+            ? el.style.borderRadius = object['resize'].imgBorderRadius
+            : el.style.borderRadius = 'initial'; 
+        })
+    })
+}
+
+resizeBorderRadius(info)
+
 
 //------------prevent default nav a behavior----------//
-let preventNav = document.querySelectorAll('.nav-link');
-preventNav.forEach(el => {
-    el.addEventListener('click', (e) => {                       //9
+
+function preventDefaultNav() {
+    let preventNav = document.querySelectorAll('.nav-link');
+    preventNav.forEach(el => {
+    el.addEventListener('click', (e) => {                       //10
         e.preventDefault()
+        })
     })
-})
+}
+
+preventDefaultNav()
+
 
