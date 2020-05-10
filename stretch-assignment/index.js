@@ -49,8 +49,8 @@ function movingBlocks(){
             position = e.target.getBoundingClientRect();
             },30)
             continuedSliding = setInterval(function(){
-                if(window.innerWidth > (position.x + 100)){
-                    e.target.style.transform += 'translateX(5px)';
+                if(window.innerWidth > (position.x + 125)){
+                    e.target.style.transform += 'translateX(15px)';
                 }
             }, 20)
         })
