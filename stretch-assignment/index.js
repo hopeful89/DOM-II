@@ -59,7 +59,6 @@ function movingBlocks(){
             clearInterval(continuedSliding);
             clearInterval(positionUpdate);
             el.style.transform = 'translateX(0)';
-            console.log(el.style.transform)
         })
     })
 }
